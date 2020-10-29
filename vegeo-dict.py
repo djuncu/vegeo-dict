@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 
-import yaml
-import sys
-import os
+from yaml import safe_load
+from sys import argv
+from os import path as op
+from os import readlink
 
 dictName = 'vegeo-dict.yml'
-fullDictName = os.path.join(os.path.dirname(os.readlink(sys.argv[0])), dictName)
+fullDictName = op.join(op.dirname(readlink(argv[0])), dictName)
 
-vDict = yaml.safe_load(open(fullDictName))
+vDict = safe_load(open(fullDictName))
 
-if len(sys.argv) == 2:
-    abb = sys.argv[1].upper()
+if len(argv) == 2:
+    abb = argv[1].upper()
 else:
     raise ValueError('ERROR: this script needs exactly one argument')
 
